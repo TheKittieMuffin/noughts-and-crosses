@@ -8,12 +8,12 @@ int first;
 int second;
 bool check = false;
 
-int userInput(void);
+int userInput(int coordNum);
 
 int main(int argc, char* argv[]) {
 	do {
-		first = userInput();
-		second = userInput();
+		first = userInput(1);
+		second = userInput(2);
 		board[first][second] = 'X';
 		for (int i = 0; i < 3; i++){
 			for (int j = 0; j < 3; j++) {
@@ -38,10 +38,10 @@ int main(int argc, char* argv[]) {
 	return EXIT_SUCCESS;
 }
 
-int userInput(void) {
+int userInput(int coordNum) {
 	int input = -1;
 	do {
-		printf("please enter: ");
+		printf("please enter coordinate %i: ", coordNum);
 		scanf("%i", &input);
 	} while ((input < 0) || (input > 2));
 	return input;
