@@ -7,35 +7,77 @@ char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 int first;
 int second;
 bool check = false;
+int turn = 0;
 
 int userInput(int coordNum);
+bool winCondition(char board[3][3]);
 
 int main(int argc, char* argv[]) {
 	do {
-		first = userInput(1);
-		second = userInput(2);
-		board[first][second] = 'X';
+		//get coordinates
+		do {
+			first = userInput(1);
+			second = userInput(2);
+		} while (isalpha(board[first][second]));
+
+
+		if ((turn % 2) == 0) {
+			board[first][second] = 'X';
+		} else {
+			board[first][second] = 'O';
+		}
 		for (int i = 0; i < 3; i++){
 			for (int j = 0; j < 3; j++) {
 				printf("[%c]", board[i][j]);
 			}
 			printf("\n");
 		}
-
-		//if the board is filled up, check = false and game ends
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (!isalpha(board[i][j])) {
-					check = true;
-					j = 3;
-					i = 3;
-				} else {
-					check = false;
-				}
-			}
+		if (winCondition(board) == true) {
+			turn = 9;
 		}
-	} while (check == true);
+
+		turn = turn + 1;
+	} while (turn < 9);
 	return EXIT_SUCCESS;
+}
+
+bool winCondition(char board[3][3]) {
+	char player = ' ';
+	for (int i = 0; i < 2; i++ ) {
+		player = (i == 0 ? 'X' : 'O');
+
+		//horizontal conditions
+		if ((board[0][0] == player) && (board[0][1] == player) && (board[0][2] == player)) {
+			printf("%c has won!\n", player);
+			return true;
+		} else if ((board[1][0] == player) && (board[1][1] == player) && (board[1][2] == player)){
+			printf("%c has won!\n", player);
+			return true;
+		} else if ((board[2][0] == player) && (board[2][1] == player) && (board[2][2] == player)){
+                	printf("%c has won!\n", player);
+			return true;
+
+		//vertical conditions
+		} else if ((board[0][0] == player) && (board[1][0] == player) && (board[2][0] == player)){
+                	printf("%c has won!\n", player);
+                	return true;
+		} else if ((board[0][1] == player) && (board[1][1] == player) && (board[2][1] == player)){
+                	printf("%c has won!\n", player);
+                	return true;
+        	} else if ((board[0][2] == player) && (board[1][2] == player) && (board[2][2] == player)){
+                	printf("%c has won!\n", player);
+                	return true;
+
+		//diagonal conditions
+		} else if ((board[0][0] == player) && (board[1][1] == player) && (board[2][2] == player)){
+                	printf("%c has won!\n", player);
+                	return true;
+		} else if ((board[0][2] == player) && (board[1][1] == player) && (board[2][0] == player)){
+                	printf("%c has won!\n", player);
+                	return true;
+        	}
+	}
+	return false;
 }
 
 int userInput(int coordNum) {
