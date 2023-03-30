@@ -18,13 +18,13 @@ int main(int argc, char* argv[]) {
 		do {
 			first = userInput(1);
 			second = userInput(2);
-		} while (isalpha(board[first][second]));
+		} while (isalpha(board[second][first]));
 
 
 		if ((turn % 2) == 0) {
-			board[first][second] = 'X';
+			board[second][first] = 'X';
 		} else {
-			board[first][second] = 'O';
+			board[second][first] = 'O';
 		}
 		printf("  0, 1, 2\n");
 		for (int i = 0; i < 3; i++){
