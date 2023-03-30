@@ -26,7 +26,9 @@ int main(int argc, char* argv[]) {
 		} else {
 			board[first][second] = 'O';
 		}
+		printf("  0, 1, 2\n");
 		for (int i = 0; i < 3; i++){
+			printf("%i", i);
 			for (int j = 0; j < 3; j++) {
 				printf("[%c]", board[i][j]);
 			}
